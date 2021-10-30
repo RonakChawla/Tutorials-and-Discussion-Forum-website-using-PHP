@@ -1,0 +1,121 @@
+<h1>Introduction To Binary Trees</h1>
+<p>
+    A binary tree is a hierarchical data structure in which each node has at most two children generally referred as left child and right child.
+</p>
+
+<p>Each node contains three components:</p>
+
+<ul>
+    <li>Pointer to left subtree</li>
+    <li>Pointer to right subtree</li>
+    <li>Data element</li>
+</ul>
+
+<p>The topmost node in the tree is called the root. An empty tree is represented by NULL pointer.</p>
+
+<p>A representation of binary tree is shown:</p>
+
+<img src="articles\data_structures\ds_binary_tree_intro\1.png"></img>
+
+<h1>Binary Tree: Common Terminologies</h1>
+
+<ul>
+    <li><b>Root:</b> Topmost node in a tree.</li>
+
+    <li>
+        <b>Parent:</b> Every node (excluding a root) in a tree is connected by a directed edge from exactly one other node. This node is called a parent.
+    </li>
+
+    <li><b>Child:</b> A node directly connected to another node when moving away from the root.</li>
+
+    <li><b>Leaf/External node:</b> Node with no children.</li>
+
+    <li><b>Internal node:</b> Node with atleast one children.</li>
+
+    <li><b>Depth of a node:</b> Number of edges from root to the node.</li>
+
+    <li>
+        <b>Height of a node:</b> Number of edges from the node to the deepest leaf. Height of the tree is the height of the root.
+    </li>
+</ul>
+
+<img src="articles\data_structures\ds_binary_tree_intro\2.png"></img>
+
+<p>
+    In the above binary tree we see that root node is A. The tree has 10 nodes with 5 internal nodes, i.e, A,B,C,E,G and 5 external nodes, i.e, D,F,H,I,J. The height of the tree is 3. B is the parent of D and E while D and E are children of B.
+</p><br>
+
+<h1>Advantages of Trees</h1>
+<p>Trees are so useful and frequently used, because they have some very serious advantages:</p>
+
+<ul>
+    <li>Trees reflect structural relationships in the data.</li>
+    <li>Trees are used to represent hierarchies.</li>
+    <li>Trees provide an efficient insertion and searching.</li>
+    <li>Trees are very flexible data, allowing to move subtrees around with minumum effort.</li>
+</ul><br>
+
+<h1>Types of Binary Trees (Based on Structure)</h1>
+
+<ul>
+    <li><b>Rooted binary tree:</b> It has a root node and every node has atmost two children.</li><br>
+
+    <li>
+        <b>Full binary tree:</b> It is a tree in which every node in the tree has either 0 or 2 children.
+    </li>
+    <img src="articles\data_structures\ds_binary_tree_intro\3.png"></img>
+
+    <ul type="circle">
+        <li>
+            The number of nodes, <code>n</code>, in a full binary tree is atleast <code>n = 2h – 1</code>, and atmost <code>n = 2h+1 – 1</code>, where <code>h</code> is the height of the tree.
+        </li>
+
+        <li>
+            The number of leaf nodes l, in a full binary tree is number, L of internal nodes + 1, i.e, l = L+1.
+        </li>
+    </ul><br>
+
+    <li>
+        <b>Perfect binary tree:</b> It is a binary tree in which all interior nodes have two children and all leaves have the same depth or same level.
+    </li>
+    <img src="articles\data_structures\ds_binary_tree_intro\4.png"></img>
+
+    <ul type="circle">
+        <li>A perfect binary tree with l leaves has n = 2l-1 nodes.</li>
+
+        <li>
+            In perfect full binary tree, l = 2h and n = 2h+1 - 1 where, n is number of nodes, h is height of tree and l is number of leaf nodes
+        </li>
+    </ul><br>
+
+    <li>
+        <b>Complete binary tree:</b> It is a binary tree in which every level, except possibly the last, is completely filled, and all nodes are as far left as possible.
+    </li>
+    <img src="articles\data_structures\ds_binary_tree_intro\5.png"></img>
+
+    <ul type="circle">
+        <li>The number of internal nodes in a complete binary tree of n nodes is floor(n/2).</li>
+    </ul><br>
+
+    <li>
+        <b>Balanced binary tree:</b> A binary tree is height balanced if it satisfies the following constraints:
+    </li>
+
+    <ol type="i">
+        <li>The left and right subtrees' heights differ by at most one, AND</li>
+        <li>The left subtree is balanced, AND</li>
+        <li>The right subtree is balanced</li>
+    </ol><br>
+
+    <p>An empty tree is height balanced.</p>
+    <img src="articles\data_structures\ds_binary_tree_intro\6.png"></img>
+
+    <ul type="circle">
+        <li>The height of a balanced binary tree is O(Log n) where n is number of nodes.</li>
+    </ul><br>
+
+    <li>
+        <b>Degenarate tree:</b> It is a tree is where each parent node has only one child node. It behaves like a linked list.
+    </li>
+    <img src="articles\data_structures\ds_binary_tree_intro\7.png"></img>
+</ul>

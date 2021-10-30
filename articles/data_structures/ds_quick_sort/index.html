@@ -1,0 +1,172 @@
+<h1>Quick Sort Algorithm</h1>
+<p>
+    Quick Sort is also based on the concept of Divide and Conquer, just like merge sort. But in quick sort all the heavy lifting(major work) is done while dividing the array into subarrays, while in case of merge sort, all the real work happens during merging
+    the subarrays. In case of quick sort, the combine step does absolutely nothing.
+</p>
+
+<p>It is also called partition-exchange sort. This algorithm divides the list into three main parts:</p>
+
+<ol type="i">
+    <li>Elements less than the Pivot element</li>
+    <li>Pivot element(Central element)</li>
+    <li>Elements greater than the pivot element</li>
+</ol>
+
+<p>
+    Pivot element can be any element from the array, it can be the first element, the last element or any random element. In this tutorial, we will take the rightmost element or the last element as pivot.
+</p>
+
+<p>
+    For example: In the array <code>{52, 37, 63, 14, 17, 8, 6, 25}</code>, we take <code>25</code> as pivot. So after the first pass, the list will be changed like this.
+</p>
+
+<code>{6 8 17 14 <b>25</b> 63 37 52}</code>
+
+<p>
+    Hence after the first pass, pivot will be set at its position, with all the elements smaller to it on its left and all the elements larger than to its right. Now <code>{6 8 17 14}</code> and <code>{63 37 52}</code> are considered as two separate sunarrays,
+    and same recursive logic will be applied on them, and we will keep doing this until the complete array is sorted.
+</p><br>
+
+<h1>How Quick Sorting Works?</h1>
+<p>Following are the steps involved in quick sort algorithm:</p>
+
+<ol type="i">
+    <li>
+        After selecting an element as pivot, which is the last index of the array in our case, we divide the array for the first time.
+    </li>
+
+    <li>
+        In quick sort, we call this partitioning. It is not simple breaking down of array into 2 subarrays, but in case of partitioning, the array elements are so positioned that all the elements smaller than the pivot will be on the left side of the pivot and
+        all the elements greater than the pivot will be on the right side of it.
+    </li>
+
+    <li>And the pivot element will be at its final sorted position.</li>
+
+    <li>The elements to the left and right, may not be sorted.</li>
+
+    <li>
+        Then we pick subarrays, elements on the left of pivot and elements on the right of pivot, and we perform partitioning on them by choosing a pivot in the subarrays.
+    </li>
+</ol>
+
+<p>Let's consider an array with values <code>{9, 7, 5, 11, 12, 2, 14, 3, 10, 6}</code></p>
+
+<p>Below, we have a pictorial representation of how quick sort will sort the given array.</p>
+
+<img src="articles\data_structures\ds_quick_sort\1.png"></img>
+
+<p>
+    In step 1, we select the last element as the pivot, which is 6 in this case, and call for partitioning, hence re-arranging the array in such a way that 6 will be placed in its final position and to its left will be all the elements less than it and to
+    its right, we will have all the elements greater than it.
+</p>
+
+<p>
+    Then we pick the subarray on the left and the subarray on the right and select a pivot for them, in the above diagram, we chose 3 as pivot for the left subarray and 11 as pivot for the right subarray.
+</p>
+
+<p>And we again call for partitioning.</p><br>
+
+<h1>Implementing Quick Sort Algorithm</h1>
+<p>Below we have a simple C program implementing the Quick sort algorithm:</p>
+
+<code class="block">// simple C program for Quick Sort
+# include&lt;stdio.h&gt;
+
+// to swap two numbers
+void swap(int* a, int* b)
+{
+    int t = *a;
+    *a = *b;
+    *b = t;
+}
+
+/*  
+    a[] is the array, p is starting index, that is 0, 
+    and r is the last index of array.  
+*/
+void quicksort(int a[], int p, int r)    
+{
+    if(p < r)
+    {
+        int q;
+        q = partition(a, p, r);
+        quicksort(a, p, q);
+        quicksort(a, q+1, r);
+    }
+}
+
+int partition (int a[], int low, int high)
+{
+    int pivot = arr[high];  // selecting last element as pivot
+    int i = (low - 1);  // index of smaller element
+ 
+    for (int j = low; j <= high- 1; j++)
+    {
+        // If current element is smaller than or equal to pivot
+        if (arr[j] <= pivot)
+        {
+            i++;    // increment index of smaller element
+            swap(&arr[i], &arr[j]);
+        }
+    }
+    swap(&arr[i + 1], &arr[high]);
+    return (i + 1);
+}
+
+// function to print the array
+void printArray(int a[], int size)
+{
+    int i;
+    for (i=0; i < size; i++)
+    {
+        printf("%d ", a[i]);
+    }
+    printf("\n");
+}
+
+int main()
+{
+    int arr[] = {9, 7, 5, 11, 12, 2, 14, 3, 10, 6};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    
+    // call quickSort function
+    quickSort(arr, 0, n-1);
+    
+    printf("Sorted array: n");
+    printArray(arr, n);
+    return 0;
+}</code><br>
+
+<h1>Complexity Analysis of Quick Sort</h1>
+<p>
+    For an array, in which partitioning leads to unbalanced subarrays, to an extent where on the left side there are no elements, with all the elements greater than the pivot, hence on the right side.
+</p>
+
+<p>
+    And if keep on getting unbalanced subarrays, then the running time is the worst case, which is <code>O(n<sup>2</sup>)</code>
+</p>
+
+<p>
+    Where as if partitioning leads to almost equal subarrays, then the running time is the best, with time complexity as <code>O(n*log n)</code>.
+</p>
+
+<code class="block">        Worst Case Time Complexity [ Big-O ]: O(n<sup>2</sup>)
+        Best Case Time Complexity [Big-omega]: O(n*log n)
+        Average Time Complexity [Big-theta]: O(n*log n)
+        Space Complexity: O(n*log n)</code><br>
+
+<p>
+    As we know now, that if subarrays partitioning produced after partitioning are unbalanced, quick sort will take more time to finish. If someone knows that you pick the last index as pivot all the time, they can intentionally provide you with array which
+    will result in worst-case running time for quick sort.
+</p>
+
+<p>
+    To avoid this, you can pick random pivot element too. It won't make any difference in the algorithm, as all you need to do is, pick a random element from the array, swap it with element at the last index, make it the pivot and carry on with quick sort.
+</p>
+
+<ol type="i">
+    <li>Space required by quick sort is very less, only <code>O(n*log n)</code> additional space is required.</li>
+    <li>
+        Quick sort is not a stable sorting technique, so it might change the occurence of two similar elements in the list while sorting.
+    </li>
+</ol>

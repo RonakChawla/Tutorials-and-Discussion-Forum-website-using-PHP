@@ -1,0 +1,133 @@
+<h1>Asymptotic Notations</h1>
+<p>
+    When it comes to analysing the complexity of any algorithm in terms of time and space, we can never provide an exact number to define the time required and the space required by the algorithm, instead we express it using some standard notations, also
+    known as Asymptotic Notations.
+</p>
+
+<p>
+    When we analyse any algorithm, we generally get a formula to represent the amount of time required for execution or the time required by the computer to run the lines of code of the algorithm, number of memory accesses, number of comparisons, temporary
+    variables occupying memory space etc. This formula often contains unimportant details that don't really tell us anything about the running time.
+</p>
+
+<p>
+    Let us take an example, if some algorithm has a time complexity of <code>T(n) = (n<sup>2</sup> + 3n + 4)</code>, which is a quadratic equation. For large values of <code>n</code>, the <code>3n + 4</code> part will become insignificant compared to
+    the <code>n<sup>2</sup></code> part.
+</p>
+
+<img src="articles\data_structures\ds_asymptotic_notations\Graph.png"></img>
+
+<p>
+    Also, When we compare the execution times of two algorithms the constant coefficients of higher order terms are also neglected.
+</p>
+
+<p>
+    An algorithm that takes a time of <code>200n<sup>2</sup></code> will be faster than some other algorithm that takes <code>n<sup>3</sup></code> time, for any value of <code>n</code> larger than 200. Since we're only interested in the asymptotic behavior
+    of the growth of the function, the constant factor can be ignored too.
+</p><br>
+
+<h1>What is Asymptotic Behaviour</h1>
+<p>
+    The word Asymptotic means approaching a value or curve arbitrarily closely (i.e., as some sort of limit is taken).
+</p>
+
+<p>Remember studying about Limits in High School, this is the same.</p>
+
+<p>
+    The only difference being, here we do not have to find the value of any expression where n is approaching any finite number or infinity, but in case of Asymptotic notations, we use the same model to ignore the constant factors and insignificant parts
+    of an expression, to device a better way of representing complexities of algorithms, in a single coefficient, so that comparison between algorithms can be done easily.
+</p>
+
+<p>Let's take an example to understand this:</p>
+
+<p>
+    If we have two algorithms with the following expressions representing the time required by them for execution, then:
+</p>
+
+<ol type="i">
+    <li><b>Expression 1:</b> <code>(20n<sup>2</sup> + 3n - 4)</code></li>
+    <li><b>Expression 2:</b> <code>(n<sup>3</sup> + 100n - 2)</code></li>
+</ol>
+
+<p>
+    Now, as per asymptotic notations, we should just worry about how the function will grow as the value of n(input) will grow, and that will entirely depend on <code>n<sup>2</sup></code> for the Expression 1, and on <code>n<sup>3</sup></code> for Expression
+    2. Hence, we can clearly say that the algorithm for which running time is represented by the Expression 2, will grow faster than the other one, simply by analysing the highest power coeeficient and ignoring the other constants(20 in <code>20n<sup>2</sup></code>)
+    and insignificant parts of the expression(<code>3n - 4</code> and <code>100n - 2</code>).
+</p>
+
+<p>The main idea behind casting aside the less important part is to make things manageable.</p>
+
+<p>
+    All we need to do is, first analyse the algorithm to find out an expression to define it's time requirements and then analyse how that expression will grow as the input(n) will grow.
+</p><br>
+
+<h1>Types of Asymptotic Notations</h1>
+<p>
+    We use three types of asymptotic notations to represent the growth of any algorithm, as input increases:
+</p>
+
+<ol type="i">
+    <li>Big Theta(Θ)</li>
+    <li>Big Oh(O)</li>
+    <li>Big Omega(Ω)</li>
+</ol><br>
+
+<h1>Tight Bounds: Theta</h1>
+<p>
+    When we say tight bounds, we mean that the time compexity represented by the Big-Θ notation is like the average value or range within which the actual time of execution of the algorithm will be.
+</p>
+
+<p>
+    For example, if for some algorithm the time complexity is represented by the expression <code>3n<sup>2</sup> + 5n</code>, and we use the <code>Big-Θ</code> notation to represent this, then the time complexity would be <code>Θ(n<sup>2</sup>)</code>,
+    ignoring the constant coefficient and removing the insignificant part, which is <code>5n</code>.
+</p>
+
+<p>
+    Here, in the example above, complexity of <code>Θ(n<sup>2</sup>)</code> means, that the avaerage time for any input <code>n</code> will remain in between, <code>k1 * n<sup>2</sup></code> and <code>k2 * n<sup>2</sup></code>, where k1, k2 are two constants,
+    therby tightly binding the expression rpresenting the growth of the algorithm.
+</p>
+
+<img src="articles\data_structures\ds_asymptotic_notations\Graph2.png"></img>
+
+<h1>Upper Bounds: Big-O</h1>
+<p>This notation is known as the upper bound of the algorithm, or a Worst Case of an algorithm.</p>
+
+<p>It tells us that a certain function will never exceed a specified time for any value of input n.</p>
+
+<p>
+    The question is why we need this representation when we already have the <code>Big-Θ</code> notation, which represents the tightly bound running time for any algorithm. Let's take a small example to understand this.
+</p>
+
+<p>
+    Consider Linear Search algorithm, in which we traverse an array elements, one by one to search a given number.
+</p>
+
+<p>
+    In Worst case, starting from the front of the array, we find the element or number we are searching for at the end, which will lead to a time complexity of n, where n represents the number of total elements.
+</p>
+
+<p>
+    But it can happen, that the element that we are searching for is the first element of the array, in which case the time complexity will be 1.
+</p>
+
+<p>
+    Now in this case, saying that the <code>Big-Θ</code> or tight bound time complexity for Linear search is <code>Θ(n)</code>, will mean that the time required will always be related to <code>n</code>, as this is the right way to represent the average
+    time complexity, but when we use the <code>Big-O</code> notation, we mean to say that the time complexity is <code>O(n)</code>, which means that the time complexity will never exceed <code>n</code>, defining the upper bound, hence saying that it can
+    be less than or equal to <code>n</code>, which is the correct representation.
+</p>
+
+<p>
+    This is the reason, most of the time you will see <code>Big-O</code> notation being used to represent the time complexity of any algorithm, because it makes more sense.
+</p><br>
+
+<h1>Lower Bounds: Omega</h1>
+<p>
+    Big Omega notation is used to define the lower bound of any algorithm or we can say the best case of any algorithm.
+</p>
+
+<p>
+    This always indicates the minimum time required for any algorithm for all input values, therefore the best case of any algorithm.
+</p>
+
+<p>
+    In simple words, when we represent a time complexity for any algorithm in the form of <code>Big-Ω</code>, we mean that the algorithm will take atleast this much time to cmplete it's execution. It can definitely take more time than this too.
+</p>

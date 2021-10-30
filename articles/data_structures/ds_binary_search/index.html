@@ -1,0 +1,145 @@
+<h1>Binary Search Algorithm</h1>
+<p>
+    Binary Search is applied on the sorted array or list of large size. It's time complexity of <code>O(log n)</code> makes it very fast as compared to other sorting algorithms. The only limitation is that the array or list of elements must be sorted
+    for the binary search algorithm to work on it.
+</p><br>
+
+<h1>Implementing Binary Search Algorithm</h1>
+<p>Following are the steps of implementation that we will be following:</p>
+
+<ol type="i">
+    <li>Start with the middle element:</li>
+    <ol type="1">
+        <li>
+            If the target value is equal to the middle element of the array, then return the index of the middle element.
+        </li>
+
+        <li>If not, then compare the middle element with the target value,</li>
+
+        <ol type="a">
+            <li>
+                If the target value is greater than the number in the middle index, then pick the elements to the right of the middle index, and start with Step 1.
+            </li>
+
+            <li>
+                If the target value is less than the number in the middle index, then pick the elements to the left of the middle index, and start with Step 1.
+            </li>
+        </ol>
+    </ol>
+
+    <li>When a match is found, return the index of the element matched.</li>
+
+    <li>If no match is found, then return -1.</li>
+</ol>
+
+<code class="block">/*
+    function for carrying out binary search on given array
+    - values[] => given sorted array
+    - len => length of the array
+    - target => value to be searched
+*/
+int binarySearch(int values[], int len, int target)
+{
+    int max = (len - 1);
+    int min = 0;
+    
+    int guess;  // this will hold the index of middle elements
+    int step = 0;  // to find out in how many steps we completed the search
+    
+    while(max >= min)
+    {
+        guess = (max + min) / 2;
+        // we made the first guess, incrementing step by 1
+        step++;
+        
+        if(values[guess] ==  target)
+        {
+            printf("Number of steps required for search: %d \n", step);
+            return guess;
+        }
+        else if(values[guess] >  target) 
+        {
+            // target would be in the left half
+            max = (guess - 1);
+        }
+        else
+        {
+            // target would be in the right half
+            min = (guess + 1);
+        }
+    }
+ 
+    // We reach here when element is not 
+    // present in array
+    return -1;
+}
+ 
+int main(void)
+{
+    int values[] = {13, 21, 54, 81, 90};
+    int n = sizeof(values) / sizeof(values[0]);
+    int target = 81;
+    int result = binarySearch(values, n, target);
+    if(result == -1)
+    {  
+        printf("Element is not present in the given array.");
+    }
+    else
+    {
+        printf("Element is present at index: %d", result);
+    }
+    return 0;
+}</code><br>
+
+<p>
+    Now let's try to understand, why is the time complexity of binary search <code>O(log n)</code> and how can we calculate the number of steps required to search an element from a given array using binary search without doing any calculations. It's super
+    easy! Are you ready?
+</p><br>
+
+<h1>Time Complexity of Binary Search O(log n)</h1>
+<p>
+    When we say the time complexity is <code>log n</code>, we actually mean <code>log<sub>2</sub>n</code>, although the base of the log doesn't matter in asymptotic notations, but still to understand this better, we generally consider a base of 2.
+</p>
+
+<p>Let's first understand what <code>log<sub>2</sub>n</code> means.</p>
+
+<img src="articles\data_structures\ds_binary_search\3.png" class="left"></img>
+
+<p>
+    Now that we know how <code>log<sub>2</sub>n</code> works with different values of <code>n</code>, it will be easier for us to relate it with the time complexity of the binary search algorithm and also to understand how we can find out the number of
+    steps required to search any number using binary search for any value of <code>n</code>.
+</p><br>
+
+<h1>Counting the Number of Steps</h1>
+<p>
+    As we have already seen, that with every incorrect guess, binary search cuts down the list of elements into half. So if we start with 32 elements, after first unsuccessful guess, we will be left with 16 elements.
+</p>
+
+<p>
+    So consider an array with 8 elements, after the first unsuccessful, binary sort will cut down the list to half, leaving behind 4 elements, then 2 elements after the second unsuccessful guess, and finally only 1 element will be left, which will either
+    be the target or not, checking that will involve one more step. So all in all binary search needed at most 4 guesses to search the target in an array with 8 elements.
+</p>
+
+<p>
+    If the size of the list would have been 16, then after the first unsuccessful guess, we would have been left with 8 elements. And after that, as we know, we need atmost 4 guesses, add 1 guess to cut down the list from 16 to 8, that brings us to 5 guesses.
+</p>
+
+<p>
+    So we can say, as the number of elements are getting doubled, the number of guesses required to find the target increments by <code>1</code>.
+</p>
+
+<p>Seeing the pattern, right?</p>
+
+<p>Generalizing this, we can say, for an array with <code>n</code> elements,</p>
+
+<p>
+    <b>the number of times we can repeatedly halve, starting at <code>n</code>, until we get the value <code>1</code>, plus one.</b>
+</p>
+
+<p>
+    And guess what, in mathematics, the function <code>log<sub>2</sub>n</code> means exactly same. We have already seen how the log function works above, did you notice something there?
+</p>
+
+<p>
+    For n = 8, the output of <code>log<sub>2</sub>n</code> comes out to be 3, which means the array can be halved 3 times maximum, hence the number of steps(at most) to find the target value will be (3 + 1) = 4.
+</p>

@@ -1,0 +1,92 @@
+<h1>Bubble Sort Algorithm</h1>
+<p>
+    Bubble Sort is a simple algorithm which is used to sort a given set of n elements provided in form of an array with n number of elements. Bubble Sort compares all the element one by one and sort them based on their values.
+</p>
+
+<p>
+    If the given array has to be sorted in ascending order, then bubble sort will start by comparing the first element of the array with the second element, if the first element is greater than the second element, it will swap both the elements, and then
+    move on to compare the second and the third element, and so on.
+</p>
+
+<p>If we have total <code>n</code> elements, then we need to repeat this process for <code>n-1</code> times.</p>
+
+<p>
+    It is known as bubble sort, because with every complete iteration the largest element in the given array, bubbles up towards the last place or the highest index, just like a water bubble rises up to the water surface.
+</p>
+
+<p>
+    Sorting takes place by stepping through all the elements one-by-one and comparing it with the adjacent element and swapping them if required.
+</p><br>
+
+<h1>Implementing Bubble Sort Algorithm</h1>
+<p>Following are the steps involved in bubble sort(for sorting a given array in ascending order):</p>
+
+<ol type="i">
+    <li>
+        Starting with the first element(index = 0), compare the current element with the next element of the array.
+    </li>
+
+    <li>If the current element is greater than the next element of the array, swap them.</li>
+
+    <li>If the current element is less than the next element, move to the next element. Repeat Step 1.</li>
+</ol>
+
+<p>Let's consider an array with values <code>{5, 1, 6, 2, 4, 3}</code></p>
+
+<p>Below, we have a pictorial representation of how bubble sort will sort the given array.</p>
+
+<img src="articles\data_structures\ds_bubble_sort\1.png"></img>
+
+<p>
+    So as we can see in the representation above, after the first iteration, 6 is placed at the last index, which is the correct position for it.
+</p>
+
+<p>Similarly after the second iteration, 5 will be at the second last index, and so on.</p>
+
+<p>Time to write the code for bubble sort:</p>
+
+<code class="block">// below we have a simple C program for bubble sort
+#include&lt;stdio.h&gt;
+
+void bubbleSort(int arr[], int n)
+{
+    int i, j, temp;
+    for(i = 0; i < n; i++)
+    {
+        for(j = 0; j < n-i-1; j++)
+        {
+            if( arr[j] > arr[j+1])
+            {
+                // swap the elements
+                temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            } 
+        }
+    }
+    
+    // print the sorted array
+    printf("Sorted Array: ");
+    for(i = 0; i < n; i++)
+    {
+        printf("%d  ", arr[i]);
+    }
+}
+
+int main()
+{
+    int arr[100], i, n, step, temp;
+    // ask user for number of elements to be sorted
+    printf("Enter the number of elements to be sorted: ");
+    scanf("%d", &n);
+    // input elements if the array
+    for(i = 0; i < n; i++)
+    {
+        printf("Enter element no. %d: ", i+1);
+        scanf("%d", &arr[i]);
+    }
+    // call the function bubbleSort
+    bubbleSort(arr, n);
+    
+    return 0;
+}</code>

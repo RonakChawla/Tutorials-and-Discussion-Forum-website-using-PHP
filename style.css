@@ -1,0 +1,158 @@
+code {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    text-decoration: none;
+    color: green;
+}
+
+div>.left>h1 {
+    font-size: 36px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0;
+    margin: 0;
+    font-weight: 500;
+}
+
+.body {
+    display: grid;
+    grid-template-columns: 25% 75%;
+}
+
+.body>div {
+    grid-template-columns: auto auto;
+}
+
+.content {
+    padding: 50px 20px;
+}
+
+.panel-wrapper {
+    position: sticky;
+    top: 0px;
+    overflow: auto;
+    padding: 50px 20px;
+    box-sizing: border-box;
+}
+
+.panel-item>h3 {
+    margin: 0;
+    margin-bottom: 10px;
+    font-weight: normal;
+    color: #777;
+}
+
+.panel-item {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    border-bottom-width: 3px;
+}
+
+.content>h1 {
+    margin-bottom: 20px;
+    line-height: 100%;
+}
+
+.content>ol,
+.content>ul {
+    line-height: 100%;
+    margin-top: 0.01px;
+    margin-bottom: 0.01px;
+}
+
+.content ol>li {
+    margin-top: 10px;
+    line-height: 25px;
+}
+
+.content ul>li {
+    margin-top: 10px;
+    line-height: 25px;
+}
+
+.content>p {
+    margin-top: 15px;
+    line-height: 25px;
+}
+
+.content {
+    font-size: 130%;
+}
+
+.content code,
+.content pre {
+    font-family: consolas, monospace;
+    border: 1px solid #e0e0e0;
+    background-color: #f0f0f0;
+    padding: 0 5px;
+    border-radius: 3px;
+}
+
+.content code.block {
+    display: block;
+    white-space: pre;
+    line-height: 20px;
+    font-size: 16px;
+    max-height: 500px;
+    overflow: auto;
+    color: #002300;
+}
+
+img {
+    width: 100%;
+    padding-left: 25%;
+    padding-right: 25%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+img.left {
+    width: auto;
+    padding: 0 !important;
+}
+
+code.block+img {
+    padding: 0 !important;
+    margin-bottom: 20px;
+    width: auto;
+}
+
+h1>sub {
+    font-weight: normal;
+    font-size: 50%;
+    color: rgba(0, 0, 0, .5);
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 100%;
+}
+
+table td,
+table th {
+    border: 1px solid #a0a0a0;
+    padding: 8px;
+}
+
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #e0e0e0;
+}

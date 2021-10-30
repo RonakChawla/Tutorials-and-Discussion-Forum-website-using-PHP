@@ -1,0 +1,219 @@
+<h1>Doubly Linked List</h1>
+<p>
+    Doubly linked list is a type of linked list in which each node apart from storing its data has two links. The first link points to the previous node in the list and the second link points to the next node in the list. The first node of the list has its
+    previous link pointing to NULL similarly the last node of the list has its next node pointing to NULL.
+</p>
+
+<img src="articles\data_structures\ds_doubly_ll\1.png"></img>
+
+<p>
+    The two links help us to traverse the list in both backward and forward direction. But storing an extra link requires some extra space.
+</p><br>
+
+<h1>Implementation of Doubly Linked List</h1>
+<p>First we define the node.</p>
+
+<code class="block">struct node
+{
+	int data;     	// Data
+	node *prev;  	// A reference to the previous node
+	node *next; 	// A reference to the next node
+};</code><br>
+
+<p>Now we define our class Doubly Linked List. It has the following methods:</p>
+
+<ul>
+    <li><b>add_front:</b> Adds a new node in the beginning of list</li>
+    <li><b>add_after:</b> Adds a new node after another node</li>
+    <li><b>add_before:</b> Adds a new node before another node</li>
+    <li><b>add_end:</b> Adds a new node in the end of list</li>
+    <li><b>delete:</b> Removes the node</li>
+    <li><b>forward_traverse:</b> Traverse the list in forward direction</li>
+    <li><b>backward_traverse:</b> Traverse the list in backward direction</li>
+</ul>
+
+<code class="block">class Doubly_Linked_List
+{
+	node *front;  	// points to first node of list
+	node *end;   	// points to first las of list
+	public:
+	Doubly_Linked_List()
+	{
+		front = NULL;
+		end = NULL;
+	}
+	void add_front(int );
+	void add_after(node* , int );
+	void add_before(node* , int );
+	void add_end(int );
+	void delete_node(node*);
+	void forward_traverse();
+	void backward_traverse();
+};</code><br>
+
+<h1>Insert Data in the beginning</h1>
+
+<ol type="i">
+    <li>The prev pointer of first node will always be NULL and next will point to front.</li>
+
+    <li>
+        If the node is inserted is the first node of the list then we make front and end point to this node.
+    </li>
+
+    <li>Else we only make front point to this node.</li>
+</ol>
+
+<img src="articles\data_structures\ds_doubly_ll\4.png"></img>
+
+<code class="block">void Doubly_Linked_List :: add_front(int d)
+{
+	// Creating new node
+	node *temp;
+	temp = new node();
+	temp->data = d;
+	temp->prev = NULL;
+	temp->next = front;
+
+	// List is empty
+	if(front == NULL)
+		end = temp;
+		
+	else
+		front->prev = temp;
+		
+	front = temp;
+}</code><br>
+
+<h1>Insert Data before a Node</h1>
+<p>
+    Let’s say we are inserting node X before Y. Then X’s next pointer will point to Y and X’s prev pointer will point the node Y’s prev pointer is pointing. And Y’s prev pointer will now point to X. We need to make sure that if Y is the first node of list
+    then after adding X we make front point to X.
+</p>
+
+<img src="articles\data_structures\ds_doubly_ll\6.png"></img>
+
+<code class="block">void Doubly_Linked_List :: add_before(node *n, int d)
+{
+	node *temp;
+	temp = new node();
+	temp->data = d;
+	temp->next = n;
+	temp->prev = n->prev;
+	n->prev = temp;
+
+	//if node is to be inserted before first node
+	if(n->prev == NULL)
+		front = temp;
+} </code><br>
+
+<h1>Insert Data after a Node</h1>
+<p>
+    Let’s say we are inserting node Y after X. Then Y’s prev pointer will point to X and Y’s next pointer will point the node X’s next pointer is pointing. And X’s next pointer will now point to Y. We need to make sure that if X is the last node of list then
+    after adding Y we make end point to Y.
+</p>
+
+<code class="block">void Doubly_Linked_List :: add_after(node *n, int d)
+{
+	node *temp;
+	temp = new node();
+	temp->data = d;
+	temp->prev = n;
+	temp->next = n->next;
+	n->next = temp;
+
+	//if node is to be inserted after last node
+	if(n->next == NULL)
+		end = temp;
+}</code><br>
+
+<h1>Insert Data in the end</h1>
+
+<ol type="i">
+    <li>The next pointer of last node will always be NULL and prev will point to end.</li>
+
+    <li>
+        If the node is inserted is the first node of the list then we make front and end point to this node.
+    </li>
+
+    <li>Else we only make end point to this node.</li>
+</ol>
+
+<img src="articles\data_structures\ds_doubly_ll\9.png"></img>
+
+<code class="block">void Doubly_Linked_List :: add_end(int d)
+{
+	// create new node
+	node *temp;
+	temp = new node();
+	temp->data = d;
+	temp->prev = end;
+	temp->next = NULL;
+
+	// if list is empty
+	if(end == NULL)
+		front = temp;
+	else
+		end->next = temp;	
+	end = temp;
+}</code><br>
+
+<h1>Remove a Node</h1>
+<p>
+    Removal of a node is quite easy in Doubly linked list but requires special handling if the node to be deleted is first or last element of the list. Unlike singly linked list where we require the previous node, here only the node to be deleted is needed.
+    We simply make the next of the previous node point to next of current node (node to be deleted) and prev of next node point to prev of current node. Look code for more details.
+</p>
+
+<img src="articles\data_structures\ds_doubly_ll\11.png"></img>
+
+<code class="block">void Doubly_Linked_List :: delete_node(node *n)
+{	
+	// if node to be deleted is first node of list
+	if(n->prev == NULL)
+	{
+		front = n->next; //the next node will be front of list
+		front->prev = NULL;
+	}
+	// if node to be deleted is last node of list
+	else if(n->next == NULL)
+	{
+		end = n->prev;   // the previous node will be last of list
+		end->next = NULL;
+	}
+	else
+	{
+		//previous node's next will point to current node's next
+		n->prev->next = n->next;
+		//next node's prev will point to current node's prev
+		n->next->prev = n->prev;
+	}
+	//delete node
+	delete(n);			
+}</code><br>
+
+<h1>Forward Traversal</h1>
+<p>Start with the front node and visit all the nodes untill the node becomes NULL.</p>
+
+<code class="block">void Doubly_Linked_List :: forward_traverse()
+{
+	node *trav;
+	trav = front;
+	while(trav != NULL)
+	{
+		cout&lt;&lt;trav->data&lt;&lt;endl;
+		trav = trav->next;
+	}
+}</code><br>
+
+<h1>Backward Traversal</h1>
+<p>Start with the end node and visit all the nodes until the node becomes NULL.</p>
+
+<code class="block">void Doubly_Linked_List :: backward_traverse()
+{
+	node *trav;
+	trav = end;
+	while(trav != NULL)
+	{
+		cout&lt;&lt;trav->data&lt;&lt;endl;
+		trav = trav->prev;
+	}
+}</code>

@@ -1,0 +1,75 @@
+<h1>Introduction to Searching Algorithms</h1>
+<p>
+	Not even a single day pass, when we do not have to search for something in our day to day life, car keys, books, pen, mobile charger and what not. Same is the life of a computer, there is so much data stored in it, that whenever a user asks for some data, computer has to search it's memory to look for the data and make it available to the user. And the computer has it's own techniques to search through it's memory fast.
+</p>
+
+<p>What if you have to write a program to search a given number in an array? How will you do it?</p>
+
+<p>Well, to search an element in a given array, there are two popular algorithms available:</p>
+
+<ol type="i">
+	<li>Linear Search</li>
+	<li>Binary Search</li>
+</ol><br>
+
+<h1>Linear Search</h1>
+<p>
+	Linear search is a very basic and simple search algorithm. In Linear search, we search an element or value in a given array by traversing the array from the starting, till the desired element or value is found.
+</p>
+
+<p>
+	It compares the element to be searched with all the elements present in the array and when the element is matched successfully, it returns the index of the element in the array, else it return <code>-1</code>.
+</p>
+
+<p>Linear Search is applied on unsorted or unordered lists, when there are fewer elements in a list.</p><br>
+
+<h1>Features of Linear Search Algorithm</h1>
+
+<ol type="i">
+	<li>It is used for unsorted and unordered small list of elements.</li>
+	
+	<li>
+		It has a time complexity of <code>O(n)</code>, which means the time is linearly dependent on the number of elements, which is not bad, but not that good too.
+	</li>
+	
+	<li>It has a very simple implementation.</li>
+</ol><br>
+
+<h1>Binary Search</h1>
+<p>Binary Search is used with sorted array or list. In binary search, we follow the following steps:</p>
+
+<ol type="i">
+	<li>
+		We start by comparing the element to be searched with the element in the middle of the list/array.
+	</li>
+	
+	<li>If we get a match, we return the index of the middle element.</li>
+	
+	<li>
+		If we do not get a match, we check whether the element to be searched is less or greater than in value than the middle element.
+	</li>
+	
+	<li>
+		If the element/number to be searched is greater in value than the middle number, then we pick the elements on the right side of the middle element(as the list/array is sorted, hence on the right, we will have all the numbers greater than the middle number), and start again from the step 1.
+	</li>
+	
+	<li>
+		If the element/number to be searched is lesser in value than the middle number, then we pick the elements on the left side of the middle element, and start again from the step 1.
+	</li>
+</ol>
+
+<p>Binary Search is useful when there are large number of elements in an array and they are sorted.</p>
+
+<p>So a necessary condition for Binary search to work is that the list/array should be sorted.</p><br>
+
+<h1>Features of Binary Search</h1>
+
+<ol type="i">
+	<li>It is great to search through large sorted arrays.</li>
+	
+	<li>
+		It has a time complexity of <code>O(log n)</code> which is a very good time complexity. We will discuss this in details in the Binary Search tutorial.
+	</li>
+	
+	<li>It has a simple implementation.</li>
+</ol>

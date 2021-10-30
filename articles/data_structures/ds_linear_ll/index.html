@@ -1,0 +1,297 @@
+<h1>Linear Linked List</h1>
+<p>
+    Linear Linked list is the default linked list and a linear data structure in which data is not stored in contiguous memory locations but each data node is connected to the next data node via a pointer, hence forming a chain.
+</p>
+
+<p>The element in such a linked list can be inserted in 2 ways:</p>
+
+<ol type="i">
+    <li>Insertion at beginning of the list.</li>
+    <li>Insertion at the end of the list.</li>
+</ol>
+
+<p>
+    Hence while writing the code for Linked List we will include methods to insert or add new data elements to the linked list, both, at the beginning of the list and at the end of the list.
+</p>
+
+<p>We will also be adding some other useful methods like:</p>
+
+<ol type="i">
+    <li>Checking whether Linked List is empty or not.</li>
+    <li>Searching any data element in the Linked List</li>
+    <li>Deleting a particular Node(data element) from the List</li>
+</ol>
+
+<p>
+    Before learning how we insert data and create a linked list, we must understand the components forming a linked list, and the main component is the Node.
+</p><br>
+
+<h1>What is a Node?</h1>
+<p>
+    A Node in a linked list holds the data value and the pointer which points to the location of the next node in the linked list.
+</p>
+
+<img src="articles\data_structures\ds_linear_ll\1.png"></img>
+
+<p>
+    In the picture above we have a linked list, containing 4 nodes, each node has some data(A, B, C and D) and a pointer which stores the location of the next node.
+</p>
+
+<p>
+    You must be wondering why we need to store the location of the next node. Well, because the memory locations allocated to these nodes are not contiguous hence each node should know where the next node is stored.
+</p>
+
+<p>
+    As the node is a combination of multiple information, hence we will be defining a class for Node which will have a variable to store data and another variable to store the pointer. In C language, we create a structure using the struct keyword.
+</p>
+
+<code class="block">class Node 
+{
+    public:
+    // our linked list will only hold int data
+    int data;
+    //pointer to the next node
+    node* next;
+  
+    // default constructor
+    Node() 
+    {
+        data = 0;
+        next = NULL;
+    }
+    
+    // parameterised constructor
+    Node(int x) 
+    {
+        data = x;
+        next = NULL;
+    }
+}</code><br>
+
+<p>
+    We can also make the Node class properties data and next as private, in that case we will need to add the getter and setter methods to access them(don't know what getter and setter methods are: Inline Functions in C++ ). You can add the getter and setter
+    functions to the Node class like this:
+</p>
+
+<code class="block">class Node 
+{
+    // our linked list will only hold int data
+    int data;
+    //pointer to the next node
+    node* next;
+  
+    // default constructor same as above
+    
+    // parameterised constructor same as above
+    
+    /* getters and setters */
+    // get the value of data
+    int getData() 
+    {
+        return data;
+    }
+
+    // to set the value for data
+    void setData(int x) 
+    {
+        this.data = x;
+    }
+    // get the value of next pointer
+    node* getNext() 
+    {
+        return next;
+    }
+    // to set the value for pointer
+    void setNext(node *n) 
+    {
+        this.next = n;
+    }
+}</code><br>
+
+<p>
+    The Node class basically creates a node for the data to be included into the Linked List. Once the object for the class Node is created, we use various functions to fit in that node into the Linked List.
+</p><br>
+
+<h1>Linked List class</h1>
+<p>
+    As we are following the complete OOPS methodology, hence we will create a separate class for Linked List, which will have all the methods like insertion, search, deletion etc. Also, the linked list class will have a pointer called head to store the location
+    of the first node which will be added to the linked list.
+</p>
+
+<code class="block">class LinkedList 
+{
+    public:
+    node *head;
+    //declaring the functions
+  
+    //function to add Node at front
+    int addAtFront(node *n);
+    //function to check whether Linked list is empty
+    int isEmpty();
+    //function to add Node at the End of list
+    int addAtEnd(node *n);
+    //function to search a value
+    node* search(int k);
+    //function to delete any Node
+    node* deleteNode(int x);
+  
+    LinkedList() 
+    {
+        head = NULL;
+    }
+}</code><br>
+
+<h1>Insertion at the Beginning</h1>
+
+<ol type="i">
+    <li>The first Node is the Head for any Linked List.</li>
+
+    <li>When a new Linked List is instantiated, it just has the Head, which is Null.</li>
+
+    <li>Else, the Head holds the pointer to the first Node of the List.</li>
+
+    <li>When we want to add any Node at the front, we must make the head point to it.</li>
+
+    <li>
+        And the Next pointer of the newly added Node, must point to the previous Head, whether it be NULL(in case of new List) or the pointer to the first Node of the List.
+    </li>
+
+    <li>
+        The previous Head Node is now the second Node of Linked List, because the new Node is added at the front.
+    </li>
+</ol>
+
+<code class="block">int LinkedList :: addAtFront(node *n) {
+  int i = 0;
+  //making the next of the new Node point to Head
+  n->next = head;
+  //making the new Node as Head
+  head = n;
+  i++;
+  //returning the position where Node is added
+  return i;
+}</code><br>
+
+<h1>Inserting at the End</h1>
+<p>Steps to insert a Node at the end :</p>
+
+<ol type="i">
+    <li>If the Linked List is empty then we simply, add the new Node as the Head of the Linked List.</li>
+
+    <li>
+        If the Linked List is not empty then we find the last node, and make it' next to the new Node, hence making the new node the last Node.
+    </li>
+</ol>
+
+<code class="block">int LinkedList :: addAtEnd(node *n) {
+  //If list is empty
+  if(head == NULL) {
+    //making the new Node as Head
+    head = n;
+    //making the next pointe of the new Node as Null
+    n->next = NULL;
+  }
+  else {
+    //getting the last node
+    node *n2 = getLastNode();
+    n2->next = n;
+  } 
+}
+
+node* LinkedList :: getLastNode() {
+  //creating a pointer pointing to Head
+  node* ptr = head;
+  //Iterating over the list till the node whose Next pointer points to null
+  //Return that node, because that will be the last node.
+  while(ptr->next!=NULL) {
+    //if Next is not Null, take the pointer one step forward
+    ptr = ptr->next;
+  }
+  return ptr;
+}</code><br>
+
+<h1>Searching for an Element in the List</h1>
+<p>
+    In searhing we do not have to do much, we just need to traverse like we did while getting the last node, in this case we will also compare the data of the Node. If we get the Node with the same data, we will return it, otherwise we will make our pointer
+    point the next Node, and so on.
+</p>
+
+<code class="block">node* LinkedList :: search(int x) {
+  node *ptr = head;
+  while(ptr != NULL && ptr->data != x) {
+    //until we reach the end or we find a Node with data x, we keep moving
+    ptr = ptr->next;
+  }
+  return ptr;
+}</code><br>
+
+<h1>Deleting a Node from the List</h1>
+<p>
+    Deleting a node can be done in many ways, like we first search the Node with data which we want to delete and then we delete it. In our approach, we will define a method which will take the data to be deleted as argument, will use the search method to
+    locate it and will then remove the Node from the List.
+</p>
+
+<p>To remove any Node from the list, we need to do the following :</p>
+
+<ol type="i">
+    <li>
+        If the Node to be deleted is the first node, then simply set the Next pointer of the Head to point to the next element from the Node to be deleted.
+    </li>
+
+    <li>
+        If the Node is in the middle somewhere, then find the Node before it, and make the Node before it point to the Node next to it.
+    </li>
+</ol>
+
+<code class="block">node* LinkedList :: deleteNode(int x) {
+  //searching the Node with data x
+  node *n = search(x);
+  node *ptr = head;
+  if(ptr == n) {
+    ptr->next = n->next;
+    return n;
+  }
+  else {
+    while(ptr->next != n) {
+      ptr = ptr->next;
+    }
+    ptr->next = n->next;
+    return n;
+  }
+}</code><br>
+
+<h1>Checking whether the List is empty or not</h1>
+<p>We just need to check whether the Head of the List is NULL or not.</p>
+
+<code class="block">int LinkedList :: isEmpty() {
+  if(head == NULL) {
+    return 1;
+  }
+  else { return 0; }
+}</code><br>
+
+<p>
+    Now you know a lot about how to handle List, how to traverse it, how to search an element. You can yourself try to write new methods around the List.
+</p>
+
+<p>
+    If you are still figuring out, how to call all these methods, then below is how your main() method will look like. As we have followed OOP standards, we will create the objects of LinkedList class to initialize our List and then we will create objects
+    of Node class whenever we want to add any new node to the List.
+</p>
+
+<code class="block">int main() {
+  LinkedList L;
+  //We will ask value from user, read the value and add the value to our Node
+  int x;
+  cout << "Please enter an integer value : ";
+  cin >> x;
+  Node *n1;
+  //Creating a new node with data as x
+  n1 = new Node(x);
+  //Adding the node to the list
+  L.addAtFront(n1);
+}</code><br>
+
+<p>
+    Similarly you can call any of the functions of the LinkedList class, add as many Nodes you want to your List.
+</p>

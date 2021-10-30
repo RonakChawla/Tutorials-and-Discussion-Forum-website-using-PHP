@@ -1,0 +1,54 @@
+<h1>Linear Search Algorithm</h1>
+<p>
+    Linear search is a very basic and simple search algorithm. In Linear search, we search an element or value in a given array by traversing the array from the starting, till the desired element or value is found.
+</p>
+
+<p>
+    As we learned in the previous tutorial that the time complexity of Linear search algorithm is <code>O(n)</code>, we will analyse the same and see why it is <code>O(n)</code> after implementing it.
+</p><br>
+
+<h1>Implementing Linear Search</h1>
+<p>Following are the steps of implementation that we will be following:</p>
+
+<ol type="i">
+    <li>Traverse the array using a for loop.</li>
+    <li>In every iteration, compare the target value with the current value of the array.</li>
+    <ol type="a">
+        <li>If the values match, return the current index of the array.</li>
+        <li>If the values do not match, move on to the next array element.</li>
+    </ol>
+    <li>If no match is found, return <code>-1</code>.</li>
+</ol>
+
+<p>
+    To search the number 5 in the array given below, linear search will go step by step in a sequential order starting from the first element in the given array.
+</p>
+
+<img src="articles\data_structures\ds_linear_search\1.png"></img>
+
+<code class="block">/* 
+    below we have implemented a simple function 
+    for linear search in C
+    
+    - values[] => array with all the values
+    - target => value to be found
+    - n => total number of elements in the array
+*/
+int linearSearch(int values[], int target, int n)
+{
+    for(int i = 0; i < n; i++)
+    {
+        if (values[i] == target) 
+        {       
+            return i; 
+        }
+    }
+    return -1;
+}</code>
+
+<img src="articles\data_structures\ds_linear_search\3.png">
+
+<h1>Final Thoughts</h1>
+<p>
+    We know you like Linear search because it is so damn simple to implement, but it is not used practically because binary search is a lot faster than linear search.
+</p>

@@ -1,0 +1,262 @@
+<h1>Double Ended Queue</h1>
+<p>
+    Double ended queue is a more generalized form of queue data structure which allows insertion and removal of elements from both the ends, i.e , front and back.
+</p>
+
+<img src="articles\data_structures\ds_doble_ended_queue\1.png"></img>
+
+<h1>Implementation of Double ended Queue</h1>
+<p>
+    Here we will implement a double ended queue using a circular array. It will have the following methods:
+</p>
+
+<ul>
+    <li><b>push_back :</b> inserts element at back</li>
+    <li><b>push_front :</b> inserts element at front</li>
+    <li><b>pop_back :</b> removes last element</li>
+    <li><b>pop_front :</b> removes first element</li>
+    <li><b>get_back :</b> returns last element</li>
+    <li><b>get_front :</b> returns first element</li>
+    <li><b>empty :</b> returns true if queue is empty</li>
+    <li><b>full :</b> returns true if queue is full</li>
+</ul>
+
+<code class="block">// Maximum size of array or Dequeue
+
+#define SIZE 5
+
+class Dequeue
+{
+    //front and rear to store the head and tail pointers
+    int  *arr;
+    int front, rear;  
+    
+    public :
+
+    Dequeue()
+    {
+    	//Create the array
+        arr = new int[SIZE];
+
+        //Initialize front and rear with -1
+        front = -1;
+        rear = -1;
+    }
+ 
+    // Operations on Deque
+    void  push_front(int );
+    void  push_back(int );
+    void  pop_front();
+    void  pop_back();
+    int  get_front();
+    int  get_back();
+    bool  full();
+    bool  empty();   
+};</code><br>
+
+<h1>Insert Elements at Front</h1>
+<p>
+    First we check if the queue is full. If its not full we insert an element at front end by following the given conditions :
+</p>
+
+<ul>
+    <li>If the queue is empty then intialize front and rear to 0. Both will point to the first element.</li>
+    <img src="articles\data_structures\ds_doble_ended_queue\3.png"></img>
+
+    <li>
+        Else we decrement front and insert the element. Since we are using circular array, we have to keep in mind that if front is equal to 0 then instead of decreasing it by 1 we make it equal to SIZE-1.
+    </li>
+    <img src="articles\data_structures\ds_doble_ended_queue\4.png"></img>
+
+    <code class="block">void Dequeue :: push_front(int key)
+{
+    if(full())
+    {
+        cout << "OVERFLOW\n";
+    }
+    else
+    {
+    	//If queue is empty
+    	if(front == -1)
+    		front = rear = 0;
+
+    	//If front points to the first position element 
+        else if(front == 0)
+            front = SIZE-1;
+        
+        else
+        	--front;
+        
+        arr[front] = key;
+    }
+}</code>
+</ul><br>
+
+<h1>Insert Elements at back</h1>
+<p>
+    Again we check if the queue is full. If its not full we insert an element at back by following the given conditions:
+</p>
+
+<ul>
+    <li>If the queue is empty then intialize front and rear to 0. Both will point to the first element.</li>
+
+    <li>
+        Else we increment rear and insert the element. Since we are using circular array, we have to keep in mind that if rear is equal to SIZE-1 then instead of increasing it by 1 we make it equal to 0.
+    </li>
+</ul>
+
+<img src="articles\data_structures\ds_doble_ended_queue\6.png"></img>
+
+<code class="block">void Dequeue :: push_back(int key)
+{
+    if(full())
+    {
+        cout << "OVERFLOW\n";
+    }
+    else
+    {
+        //If queue is empty
+    	   if(front == -1)
+    		  front = rear = 0;
+
+    	   //If rear points to the last element
+        else if(rear == SIZE-1)
+            rear = 0;
+        
+        else
+        	++rear;
+        
+        arr[rear] = key;
+    }    
+}</code><br>
+
+<h1>Delete First Element</h1>
+<p>
+    In order to do this, we first check if the queue is empty. If its not then delete the front element by following the given conditions :
+</p>
+
+<ul>
+    <li>If only one element is present we once again make front and rear equal to -1.</li>
+
+    <li>
+        Else we increment front. But we have to keep in mind that if front is equal to SIZE-1 then instead of increasing it by 1 we make it equal to 0.
+    </li>
+</ul>
+
+<img src="articles\data_structures\ds_doble_ended_queue\8.png"></img>
+
+<code class="block">void Dequeue :: pop_front()
+{
+    if(empty())
+    {
+        cout << "UNDERFLOW\n";
+    }
+    else
+    {
+    	//If only one element is present
+        if(front == rear)
+        	front = rear = -1;
+
+        //If front points to the last element 
+        else if(front == SIZE-1)
+        	front = 0;
+
+        else
+        	++front;		
+    }
+}</code><br>
+
+<h1>Delete Last Element</h1>
+<p>
+    Inorder to do this, we again first check if the queue is empty. If its not then we delete the last element by following the given conditions :
+</p>
+
+<ul>
+    <li>If only one element is present we make front and rear equal to -1.</li>
+
+    <li>
+        Else we decrement rear. But we have to keep in mind that if rear is equal to 0 then instead of decreasing it by 1 we make it equal to SIZE-1.
+    </li>
+</ul>
+
+<img src="articles\data_structures\ds_doble_ended_queue\10.png"></img>
+
+<code class="block">void Dequeue :: pop_back()
+{
+    if(empty())
+    {
+        cout << "UNDERFLOW\n";
+    }
+    else
+    {
+    	//If only one element is present
+        if(front == rear)
+        	front = rear = -1;
+
+        //If rear points to the first position element 
+        else if(rear == 0)
+        	rear = SIZE-1;
+
+        else
+        	--rear;		
+    }
+}</code><br>
+
+<h1>Check if Queue is empty</h1>
+<p>
+    It can be simply checked by looking where front points to. If front is still intialized with -1, the queue is empty.
+</p>
+
+<code class="block">bool Dequeue :: empty()
+{
+    if(front == -1)
+    	return true;
+    else
+    	return false;
+}</code><br>
+
+<h1>Check if Queue is full</h1>
+<p>
+    Since we are using circular array, we check for following conditions as shown in code to check if queue is full.
+</p>
+
+<code class="block">bool Dequeue :: full()
+{
+    if((front == 0 && rear == SIZE-1)  ||
+    	(front == rear + 1))
+        return true;
+    else
+        return false;
+}</code><br>
+
+<h1>Return First Element</h1>
+<p>If the queue is not empty then we simply return the value stored in the position which front points.</p>
+
+<code class="block">int Dequeue :: get_front()
+{
+    if(empty())
+    {	cout << "f=" &lt;&lt;front &lt;&lt; endl;
+        cout << "UNDERFLOW\n";
+        return -1;
+    }
+    else
+    {
+        return arr[front];
+    }
+}</code><br>
+
+<h1>Return Last Element</h1>
+<p>If the queue is not empty then we simply return the value stored in the position which rear points.</p>
+
+<code class="block">int Dequeue :: get_back()
+{
+    if(empty())
+    {
+        cout << "UNDERFLOW\n";
+        return -1;
+    }
+    else
+    {
+        return arr[rear];
+    }
+}</code>
